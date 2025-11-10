@@ -1,0 +1,124 @@
+.content-reminder-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2147483647;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.content-reminder-container {
+  position: relative;
+  background-color: white;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.content-reminder-content {
+  font-size: 24px;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.content-reminder-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  line-height: 1;
+  padding: 0;
+}
+
+.content-reminder-close:hover {
+  background-color: #d32f2f;
+}
+
+.content-reminder-overlay.music-alarm {
+  animation: pulseBackground 2s ease-in-out infinite;
+}
+
+@keyframes pulseBackground {
+  0%, 100% {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+  50% {
+    background-color: rgba(33, 150, 243, 0.3);
+  }
+}
+
+.music-alarm-container {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.music-alarm-icon {
+  font-size: 100px;
+  margin-bottom: 20px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.music-alarm-text {
+  font-size: 36px;
+  font-weight: bold;
+  color: #2196F3;
+  margin-bottom: 10px;
+}
+
+.music-alarm-subtitle {
+  font-size: 20px;
+  color: #666;
+  font-style: italic;
+}

@@ -1,0 +1,28 @@
+﻿{
+  "manifest_version": 3,
+  "name": "Content Reminder",
+  "version": "1.0",
+  "description": "Display custom content at specified intervals",
+  "permissions": [
+    "storage",
+    "alarms",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}

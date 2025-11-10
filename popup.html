@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 450px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    h3 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #555;
+      font-size: 16px;
+    }
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #ddd;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 14px;
+      color: #666;
+      border-bottom: 3px solid transparent;
+    }
+    .tab.active {
+      color: #4CAF50;
+      border-bottom-color: #4CAF50;
+      font-weight: bold;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #555;
+      font-size: 14px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    select, input[type="number"], input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .secondary-btn {
+      background-color: #2196F3;
+      margin-top: 10px;
+    }
+    .secondary-btn:hover {
+      background-color: #0b7dda;
+    }
+    .danger-btn {
+      background-color: #f44336;
+    }
+    .danger-btn:hover {
+      background-color: #da190b;
+    }
+    .status {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+      font-size: 13px;
+    }
+    .status.success {
+      background-color: #d4edda;
+      color: #155724;
+      display: block;
+    }
+    .status.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      display: block;
+    }
+    .toggle-section {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    .content-list {
+      margin-top: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+    }
+    .content-item {
+      padding: 10px;
+      margin: 5px 0;
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .content-text {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 13px;
+      margin-right: 10px;
+    }
+    .content-actions {
+      display: flex;
+      gap: 5px;
+    }
+    .small-btn {
+      padding: 5px 10px;
+      font-size: 12px;
+      margin: 0;
+      width: auto;
+    }
+    .content-select-list {
+      margin-top: 10px;
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      background: #f9f9f9;
+    }
+    .content-checkbox-item {
+      padding: 8px;
+      margin: 5px 0;
+      background: white;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+    }
+    .content-checkbox-item input {
+      margin-right: 10px;
+    }
+    .content-checkbox-item label {
+      margin: 0;
+      font-weight: normal;
+      flex: 1;
+      cursor: pointer;
+    }
+    .music-info {
+      margin-top: 10px;
+      padding: 10px;
+      background: #e3f2fd;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #1565c0;
+    }
+    .current-sound {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .sound-option {
+      padding: 8px;
+      margin: 5px 0;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .sound-option:hover {
+      background: #f0f0f0;
+    }
+    .sound-option input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Content Reminder v2.0</h2>
+  
+  <div class="tabs">
+    <button class="tab active" data-tab="interval">Interval Mode</button>
+    <button class="tab" data-tab="music">Music Alarm</button>
+    <button class="tab" data-tab="contents">Manage Content</button>
+  </div>
+
+  <!-- Interval Mode Tab -->
+  <div class="tab-content active" id="interval-tab">
+    <label for="frequency">Display Frequency:</label>
+    <select id="frequency">
+      <option value="1">Every 1 minute</option>
+      <option value="5">Every 5 minutes</option>
+      <option value="15">Every 15 minutes</option>
+      <option value="30">Every 30 minutes</option>
+      <option value="60">Every 1 hour</option>
+      <option value="120">Every 2 hours</option>
+    </select>
+    
+    <h3>Select Content to Display:</h3>
+    <div class="content-select-list" id="interval-content-select">
+      <p style="color: #999; font-size: 13px; text-align: center;">Add content first</p>
+    </div>
+    
+    <div class="toggle-section">
+      <label class="toggle-label">
+        <input type="checkbox" id="interval-enabled">
+        <span>Enable Interval Reminders</span>
+      </label>
+    </div>
+    
+    <button id="save-interval">Save Interval Settings</button>
+    <button id="test" class="secondary-btn">Test Display Now</button>
+  </div>
+
+  <!-- Music Alarm Tab -->
+  <div class="tab-content" id="music-tab">
+    <label for="music-frequency">Alarm Frequency:</label>
+    <select id="music-frequency">
+      <option value="5">Every 5 minutes</option>
+      <option value="10">Every 10 minutes</option>
+      <option value="15">Every 15 minutes</option>
+      <option value="30">Every 30 minutes</option>
+      <option value="60">Every 1 hour</option>
+    </select>
+    
+    <h3>Select Content to Display:</h3>
+    <div class="content-select-list" id="music-content-select">
+      <p style="color: #999; font-size: 13px; text-align: center;">Add content first</p>
+    </div>
+    
+    <h3>Select Alarm Sound:</h3>
+    <div id="sound-options">
+      <div class="sound-option">
+        <input type="radio" name="sound" id="sound-bell" value="bell" checked>
+        <label for="sound-bell">🔔 Bell</label>
+      </div>
+      <div class="sound-option">
+        <input type="radio" name="sound" id="sound-chime" value="chime">
+        <label for="sound-chime">🎵 Chime</label>
+      </div>
+      <div class="sound-option">
+        <input type="radio" name="sound" id="sound-beep" value="beep">
+        <label for="sound-beep">📢 Beep</label>
+      </div>
+      <div class="sound-option">
+        <input type="radio" name="sound" id="sound-ding" value="ding">
+        <label for="sound-ding">✨ Ding</label>
+      </div>
+    </div>
+    
+    <label for="music-volume">Volume:</label>
+    <input type="number" id="music-volume" min="0" max="100" value="50" placeholder="0-100">
+    
+    <div class="toggle-section">
+      <label class="toggle-label">
+        <input type="checkbox" id="music-enabled">
+        <span>Enable Music Alarm</span>
+      </label>
+    </div>
+    
+    <button id="save-music">Save Music Settings</button>
+    <button id="test-music" class="secondary-btn">Test Sound & Display</button>
+    
+    <div class="music-info">
+      💡 Music alarm will play sound and show your selected content
+    </div>
+  </div>
+
+  <!-- Manage Content Tab -->
+  <div class="tab-content" id="contents-tab">
+    <label for="new-content">Add New Content:</label>
+    <textarea id="new-content" placeholder="Enter content to display..."></textarea>
+    <button id="add-content">Add Content</button>
+    
+    <h3>Saved Contents</h3>
+    <div class="content-list" id="content-list">
+      <p style="color: #999; font-size: 13px; text-align: center;">No content saved yet</p>
+    </div>
+  </div>
+  
+  <div id="status" class="status"></div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
